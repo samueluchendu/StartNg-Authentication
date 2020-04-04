@@ -106,9 +106,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               //  die();
 
          }else{
-                    $errors['credentials']='';
+                  //  $errors['credentials']='';
                      $_SESSION['credentials']='Incorrect Email or Password';
                      header('location: login.php');
+
+
+                       //this validation doesnt work
+                     if($current_user!==$email.".json" || $user_content_password !== $user_password){
+                       $_SESSION['not_match']='Invalid credentials';
+                       header('location: login.php');
+                     }
+
+
 
 
                   }
