@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
        header('location: login.php');
       }else{
         $password=$_POST['password'];
-        if(strlen($password) <= 7){$errors['password1']=''."<br>"; $_SESSION['password1']='paasword must atleast be 8 characters';  header('location: login.php');}
+        if(strlen($password) <= 7){$errors['password1']=''."<br>"; $_SESSION['password1']='password must atleast be 8 characters';  header('location: login.php');}
 
       }// End Validation for Password field//////////
 
@@ -66,30 +66,65 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       for ($counter=0; $counter < $count_users ; $counter++) {
          $current_user = $all_users[$counter];
 
-        if($current_user){
+        if($current_user ==$email.".json"){
           //  echo 'there are users';
             //checking user password from the jason content in the get_included_files
-            $usercontent= file_get_contents("db/user/".$current_user."json");
-            echo $usercontent;
-            // $decode_user_content= json_decode($usercontent);
-            // $user_content_password =$decode_user_content->password;
-            // $user_password = password_verify($data['password'] , $user_content_password);
+            $usercontent= file_get_contents("db/user/".$email.".json");
+            // echo $usercontent. "<br>";
+            $decode_user_content= json_decode($usercontent);
+            $user_content_password =$decode_user_content->password;
+            $user_password = password_verify($data['password'] , $user_content_password);
+            ////users content from file
 
 
-           //  if($current_user==$email.".json" && $user_content_password == $user_password){
-           //    //   echo 'welcome to dashboard'; ///redirect to dashbo
-           //       header('location: dashboard.php');
-           //
-           //       die();
-           //
-           //   }
-           //   }else{
-           //
-           //    header('location: register.php');
-           //
-           //
-           // }
-           }
+
+
+
+
+            if($current_user==$email.".json" && $user_content_password == $user_password){
+              //   display error and redirect
+
+
+            $user_data=[
+                  'id' => $decode_user_content->id,
+               'firstname' =>$decode_user_content->firstname,
+               'lastname' =>$decode_user_content->lastname,
+               'email' =>$decode_user_content->email,
+               'gender' =>$decode_user_content->gender,
+               'designation' =>$decode_user_content->designation,
+               'department' =>$decode_user_content->department,
+               'password' =>$decode_user_content->password
+             ];
+
+               $_SESSION['user_info']= $user_data;
+
+             header('location: dashboard.php');
+                  // echo 'Welcome';
+
+
+
+              //  die();
+
+         }else{
+                    $errors['credentials']='';
+                     $_SESSION['credentials']='Incorrect Email or Password';
+                     header('location: login.php');
+
+
+                  }
+
+
+
+
+
+             //die();
          }
+
+
+
+
        }
+
      }
+
+         }

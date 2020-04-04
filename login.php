@@ -6,6 +6,10 @@
 <h2>Login Here</h2>
 
 <div>
+  <?php if(isset($_SESSION['credentials'])){ echo "<span style='color:red';>". $_SESSION['credentials']. "</span><br>"; unset($_SESSION['credentials']); } ?>
+  <?php if(isset($_SESSION['not_match'])){ echo "<span style='color:red';>". $_SESSION['not_match']. "</span><br>"; unset($_SESSION['not_match']); } ?>
+
+
 <form action="processlogin.php" method="POST">
   <label for="email">Email:</label>
   <input type="email" name="email"><br>
@@ -24,7 +28,8 @@
 
 </select><br>
   <input type="submit" name="Submit">
-</form>
+</form> <p><a href="register.php">Click here to register</a></p>
+
 
 <p>If you click the "Submit" button, the form-data will</p>
 </div>
