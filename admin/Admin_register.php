@@ -1,22 +1,15 @@
 <?php session_start();
-
-if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info']['firstname'])){
-
-  header('location: dashboard.php');
+if($_SESSION['user_info']['designation'] !== 'Admin'){
+  header('location: ../login.php');
 }
-if(@$_SESSION['designation'] == 'Admin'){
-  header('location: admin/admin_dashboard.php');
-}
- ?>
+?>
 <!DOCTYPE html>
 <html>
 <body>
 
-
-
 <h2>HTML Forms</h2>
 <div>
-<form action="validate.php" method="POST">
+<form action="AdminProcessRegister.php" method="POST">
   <label for="fname">First name:</label>
   <input type="text" name="fname"><br>
  <?php if(isset($_SESSION['firstname'])){ echo "<span style='color:red';>". $_SESSION['firstname']. "</span><br>"; unset($_SESSION['firstname']); } ?>
@@ -55,7 +48,7 @@ if(@$_SESSION['designation'] == 'Admin'){
 <option value="Staff">Staff</option>
 <option value="Patient">Patient</option>
 </select><br>
-<?php if(isset($_SESSION['designation'])){ echo "<span style='color:red';>". $_SESSION['designation']. "</span><br>"; unset($_SESSION['designation']); } ?>
+<?php if(isset($_SESSION['designate'])){ echo "<span style='color:red';>". $_SESSION['designate']. "</span><br>"; unset($_SESSION['designate']); } ?>
 
 <br>
 
@@ -63,17 +56,17 @@ if(@$_SESSION['designation'] == 'Admin'){
 <label for="email">Email:</label>
   <input type="email"  name="email" ><br>
   <?php if(isset($_SESSION['email'])){ echo "<span style='color:red';>". $_SESSION['email']. "</span><br>"; unset($_SESSION['email']); } ?>
-  <?php if(isset($_SESSION['email1'])){ echo "<span style='color:red';>". $_SESSION['email1']. "</span><br>";unset($_SESSION['email1']);} ?>
-   <?php if(isset($_SESSION['email2'])){ echo "<span style='color:red';>". $_SESSION['email2']. "</span><br>";unset($_SESSION['email2']);} ?>
-    <?php if(isset($_SESSION['email3'])){ echo "<span style='color:red';>". $_SESSION['email3']. "</span><br>";unset($_SESSION['email3']);} ?>
+  <?php if(isset($_SESSION['email01'])){ echo "<span style='color:red';>". $_SESSION['email01']. "</span><br>";unset($_SESSION['email01']);} ?>
+   <?php if(isset($_SESSION['email02'])){ echo "<span style='color:red';>". $_SESSION['email02']. "</span><br>";unset($_SESSION['email02']);} ?>
+    <?php if(isset($_SESSION['email03'])){ echo "<span style='color:red';>". $_SESSION['email03']. "</span><br>";unset($_SESSION['email03']);} ?>
       <?php if(isset($_SESSION['user1'])){ echo "<span style='color:red';>". $_SESSION['user1']. "</span><br>";unset($_SESSION['user1']);} ?>
 
    <br>
 
   <label for="password">Password:</label>
   <input type="password"  name="password" ><br>
-  <?php if(isset($_SESSION['password'])){ echo "<span style='color:red';>". $_SESSION['password']. "</span><br>"; unset($_SESSION['password']); } ?>
   <?php if(isset($_SESSION['password1'])){ echo "<span style='color:red';>". $_SESSION['password1']. "</span><br>"; unset($_SESSION['password1']); } ?>
+  <?php if(isset($_SESSION['password2'])){ echo "<span style='color:red';>". $_SESSION['password2']. "</span><br>"; unset($_SESSION['password2']); } ?>
 
   <br>
 

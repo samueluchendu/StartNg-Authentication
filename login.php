@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php session_start();
+
+if(@$_SESSION['user_info']['designation'] == 'Admin'){
+  header('location: admin/admin_dashboard.php');
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <body>
@@ -7,7 +13,6 @@
 
 <div>
   <?php if(isset($_SESSION['credentials'])){ echo "<span style='color:red';>". $_SESSION['credentials']. "</span><br>"; unset($_SESSION['credentials']); } ?>
-  <?php if(isset($_SESSION['not_match'])){ echo "<span style='color:red';>". $_SESSION['not_match']. "</span><br>"; unset($_SESSION['not_match']); } ?>
 
 
 <form action="processlogin.php" method="POST">
@@ -21,7 +26,7 @@
   <br>
   <label for="password">Password:</label>
   <input type="password"  name="password" ><br>
-  <?php if(isset($_SESSION['password'])){ echo "<span style='color:red';>". $_SESSION['password']. "</span><br>"; unset($_SESSION['password']); } ?>
+  <?php if(isset($_SESSION['password0'])){ echo "<span style='color:red';>". $_SESSION['password0']. "</span><br>"; unset($_SESSION['password0']); } ?>
   <?php if(isset($_SESSION['password1'])){ echo "<span style='color:red';>". $_SESSION['password1']. "</span><br>"; unset($_SESSION['password1']); } ?>
 
 <br>
