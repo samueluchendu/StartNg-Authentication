@@ -21,8 +21,8 @@ if($_SESSION['user_info']['designation'] == 'Admin'){
   <p> Registration Date: <?php echo   $_SESSION['user_info']['reg_date']."<br>"; ?> </p>
   <p> Login Time:<?php echo $_SESSION['user_info']['login_time']."<br>"; ?> </p>
   <p> Login Date:<?php echo $_SESSION['user_info']['login_date']."<br>"; ?> </p>
-  <p> Logout Time:<?php echo $_SESSION['user_info']['logout_time']."<br>"; ?> </p>
-  <p> Logout Date:<?php echo $_SESSION['user_info']['logout_date']."<br>"; ?> </p>
+  <p>Last Login Time:<?php echo $_SESSION['user_info']['logout_time']."<br>"; ?> </p>
+  <p>Last Login Date:<?php echo $_SESSION['user_info']['logout_date']."<br>"; ?> </p>
 
 
 
