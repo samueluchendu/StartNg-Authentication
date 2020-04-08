@@ -1,6 +1,6 @@
-# STEPS TO RUN APPLICATION LOCALLY
+### STEPS TO RUN APPLICATION LOCALLY
 
-*Download WAMP from [Apachefriends](https://www.Apachefriends.org/download.html)
+* Download WAMP from [Apachefriends](https://www.Apachefriends.org/download.html)
 
 Click on the downlaoded file and follow the prompt to install WAMP which allows the testing of full website on your desktop without an online server.
 
