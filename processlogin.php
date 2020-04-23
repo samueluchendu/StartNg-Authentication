@@ -1,128 +1,199 @@
-<?php
-session_start();
-////ERROR ARRAY;
-$errors= array();
+<?php session_start();
+
+require_once('functions/alert.php');
+require_once('functions/users.php');
+require_once('functions/validation.php');
 
 
-//input variable///////
- $email=""; $password="";
 
-///checking validation/////////
+
+    $errors = 0;
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
+   validateEmail($email= $_POST['email']);
+      // if(empty($_POST['email'])){
 
-  //Validation for Email field//////////
-  if(empty($_POST['email'])){
-
-    $errors['email']='';
-    $_SESSION['email']='email is required';
-    header('location: login.php');
-  }else{
-
-    $email=$_POST['email'];
-
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){$errors['email1']=''; $_SESSION['email1']='Email is invalid';  header('location: login.php');}
-
-    if(strlen($email) <= 5){$errors['email2']=''; $_SESSION['email2']='Email must not be less than 5';  header('location: login.php');}
-
-    if(!strpos($email, '.')){$errors['email3']=''; $_SESSION['email3']='Email must contain ' . ". " . 'symbol';  header('location: login.php');}
-      }// End Validation for Email field//////////
+      //       $errors++;
 
 
+      //       set_alert('email_error', 'Email is required');
+      //       header('location: login.php');
 
-      //Validation for Password field//////////
-    if(empty($_POST['password'])){
-        $errors['password']='';
-        $_SESSION['password0']='password is required';
-        header('location: login.php');
+      // }else{
 
-          }
-      else{
+      //        $email=$_POST['email'];
 
-        $password=$_POST['password'];
-        if(strlen($password) <= 7){$errors['password1']=''."<br>"; $_SESSION['password1']='password must atleast be 8 characters';  header('location: login.php');}
+      //       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-      }// End Validation for Password field//////////
+      //           $errors++;
 
 
+      //             set_alert('email_error', 'Email is invalid');
+      //            header('location: login.php');
+      //     }
 
-  if (count($errors) > 0) {
+      //     if (strlen($email) <= 5) {
+
+      //           $errors++;
+
+
+      //             set_alert('email_error',  'Email must not be less than 5');
+      //             header('location: login.php');
+      //     }
+
+      //     if (!strpos($email, '.')) {
+
+      //           $errors++;
+
+
+      //             set_alert('email_error',  'Email must contain ' . ". " . 'symbol');
+      //             header('location: login.php');
+
+      //     }
+
+      // }
+
+
+      validatePassword($password = $_POST['password']);
+
+
+
+
+
+      
+
+      
+      //         if (empty($_POST['password'])) {
+
+      //               $errors++ ; 
+
+                   
+      //               set_alert('password_error',  'password is required');
+      //               header('location: login.php');
+
+      //      } else {
+
+      //             $password=$_POST['password'];
+
+      //             if (strlen($password) <= 7) {
+
+      //                   $errors++ ;
+
+                       
+      //                   set_alert('password_error',  'password must atleast be 8 characters');
+      //                   header('location: login.php');
+      //             }
+
+      //   } 
+
+
+
+  if ($errors > 0) {
+    
        'you have  errors';
+
+
   }else{
 
-    $data=[
-         'email' =>$email,
-         'password' =>$password,
-     ];
+            userLogin($email, $password);
 
-      $all_users= scandir("db/user/");
-      $count_users = count($all_users);
-      date_default_timezone_set("Africa/Lagos");
-      $login_time =date("h:i:sa");
-      $login_date = date("Y-m-d");
+//         $all_users= scandir("db/user/");
+//         $count_users = count($all_users);
 
-
-      for ($counter=0; $counter < $count_users ; $counter++) {
-         $current_user = $all_users[$counter];
-
-         if($current_user ==$email.".json"){
-
-          //  echo "email match"."<br>";
-
-            //checking user password from the jason content in the get_included_files
-            $usercontent= file_get_contents("db/user/".$email.".json");
-            $decode_user_content= json_decode($usercontent);
-            $user_content_password =$decode_user_content->password;
-            $user_password = password_verify($data['password'] , $user_content_password);
-
-              if($user_content_password == $user_password){
-
-                $user_data=[
-                      'id' => $decode_user_content->id,
-                      'reg_time'=> $decode_user_content->reg_time,
-                      'reg_date'=> $decode_user_content->reg_date,
-                      'logout_time' => $decode_user_content->logout_time,
-                      'logout_date' => $decode_user_content->logout_date,
-                      'login_time' => $login_time,
-                      'login_date' => $login_date,
-                   'firstname' =>$decode_user_content->firstname,
-                   'lastname' =>$decode_user_content->lastname,
-                   'email' =>$decode_user_content->email,
-                   'gender' =>$decode_user_content->gender,
-                   'designation' =>$decode_user_content->designation,
-                   'department' =>$decode_user_content->department,
-                   'password' =>$decode_user_content->password
-                 ];
-
-                   $_SESSION['user_info']= $user_data;
-                   header('location: dashboard.php');
-
-                 }
-                 else{
-                    $_SESSION['credentials']='Incorrect Email or Password';
-                     header('location: login.php'); ////redirect to login if password or email is incorrect
-                 }
+//         date_default_timezone_set("Africa/Lagos");
+//         $login_time =date("h:i:sa");
+        
+//         $login_date = date("Y-m-d");
 
 
-              if($decode_user_content->designation == "Admin"){ $_SESSION['designation']='Admin'; header('location: Admin/admin_dashboard.php');} ///redirect to Admin page
-              if($decode_user_content->designation == "Staff"){ $_SESSION['designation']='Staff'; header('location: staff_dashboard.php');} ///redirect to Admin page
+//             for ($counter=0; $counter < $count_users ; $counter++) {
 
-                die();
-         }
-       }
-       if($current_user !==$email.".json"){
+//                     $current_user = $all_users[$counter];
+               
+
+//         if ($current_user== $email.".json"){
+
+
+//              $userContent= file_get_contents("db/user/".$email.".json");
+//              $userContentObject= json_decode($userContent);
+
+                  
+
+//               $userPasswordFromDB = $userContentObject->password;
+
+            
+//               $user_password = password_verify($password , $userPasswordFromDB);
+
+
+             
+//               if($userPasswordFromDB == $user_password){
+                 
+//                 $userDetails=[
+//                       'id' => $userContentObject->id,
+//                       'reg_time'=> $userContentObject->reg_time,
+//                       'reg_date'=> $userContentObject->reg_date,
+//                       'logout_time' => $userContentObject->logout_time,
+//                       'logout_date' => $userContentObject->logout_date,
+//                       'login_time' => $login_time,
+//                       'login_date' => $login_date,
+//                       'firstname' => $userContentObject->firstname,
+//                       'lastname' => $userContentObject->lastname,
+//                       'email' => $userContentObject->email,
+//                       'gender' => $userContentObject->gender,
+//                       'designation' => $userContentObject->designation,
+//                       'department' => $userContentObject->department,
+//                       'password' => $userContentObject->password
+//                  ];
+                    
+//                    $_SESSION['userDetails']=  $userDetails;
+
+//                    header('location: dashboard.php');
+//                    die();
+
+
+//                  } else {
+
+                      
+//                        set_alert('email_error',  'Incorrect Email or Password');
+//                         header('location: login.php'); 
+
+//                    }
+
+
+//                 if ($userContentObject->designation == "Admin") {
+
+//                       $_SESSION['designation'] = 'Admin';
+//                       header('location: Admin_dashboard.php');
+
+//                 }
+
+
+//                 if ($userContentObject->designation == "Staff") {
+
+//                         $_SESSION['designation'] = 'Staff';
+//                         header('location: staff_dashboard.php');
+
+//                 } 
+
+//                    die();
+//          }
+//        }
+//           if($current_user !== $email . ".json"){
 
         
-           $_SESSION['credentials']='Incorrect Email or Password';
-           header('location: login.php'); ///redirect to login if password or email is incorrect
+             
+//               set_alert('email_error',  'Incorrect Email or Password');
+//               header('location: login.php'); ///redirect to login if password or email is incorrect
 
 
 
 
-     }
-   }
+//      }
+    }
  }
+
 
 
             //checking user pa

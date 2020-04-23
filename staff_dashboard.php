@@ -1,19 +1,125 @@
 <?php session_start();
-if($_SESSION['user_info']['designation'] !== 'Staff'){
-  header('location: login.php');
+
+require_once('functions/alert.php');
+require_once('functions/users.php');
+include("lib/header.php");
+
+
+if (!staffLogin()) {
+
+     header('location: login.php');
 }
+
 ?>
 
-<h3> WELCOME STAFF</h3>   <p><a href='logout.php'>LOGOUT</a></p>
-
-<?php if(isset($_SESSION['success'])){ echo "<span style='color:green';>". $_SESSION['success']. "</span><br>"; unset($_SESSION['success']); } ?>
 
 
-<p> Name:<?php echo $_SESSION['user_info']['firstname']."<br>"; ?> </p>
-<p> Designation:<?php echo $_SESSION['user_info']['designation']."<br>"; ?> </p>
-<p> Registration time:<?php echo  $_SESSION['user_info']['reg_time']."<br>"; ?> </p>
-<p> Registration Date:<?php echo  $_SESSION['user_info']['reg_date']."<br>"; ?> </p>
-<p> Login Time:<?php echo $_SESSION['user_info']['login_time']."<br>"; ?> </p>
-<p> Login Date:<?php echo $_SESSION['user_info']['login_date']."<br>"; ?> </p>
-<p> Logout Time:<?php echo $_SESSION['user_info']['logout_time']."<br>"; ?> </p>
-<p> Logout Date:<?php echo $_SESSION['user_info']['logout_date']."<br>"; ?> </p>
+<body>
+
+     <div class="container">
+
+          <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+               <!-- Brand/logo -->
+               <a class="navbar-brand" href="#">
+                    <h3> WELCOME STAFF</h3>
+               </a>
+
+               <!-- Links -->
+               <ul class="navbar-nav">
+                    <li class="nav-item">
+                         <h6> <a class="navbar-brand"" href=" logout.php">Logout</a></h6>
+                    </li>
+               </ul>
+          </nav>
+          <hr>
+          <br>
+          <br>
+          <br>
+
+
+          <?php
+          if (isset($_SESSION['success'])) {
+
+               echo "<span style='color:green';>" . $_SESSION['success'] . "</span><br>";
+               unset($_SESSION['success']);
+          }
+          ?>
+
+
+
+          <div class="row">
+               <div class="col bg-success">
+                    <p><strong style="color:#ffff"> Registration time:</strong><?php echo  $_SESSION['userDetails']['reg_time']; ?> </p>
+
+               </div>
+               <div class=" col bg-success">
+                    <p><strong style="color:#ffff"> Registration Date:</strong> <?php echo  $_SESSION['userDetails']['reg_date']; ?> </p>
+               </div>
+               <div class="col bg-success">
+                    <p><strong style="color:#ffff"> Login Time:</strong> <?php echo $_SESSION['userDetails']['login_time']; ?> </p>
+               </div>
+               <div class="col bg-success">
+                    <p><strong style="color:#ffff"> Login Date:</strong><?php echo $_SESSION['userDetails']['login_date']; ?> </p>
+               </div>
+          </div>
+
+
+
+
+          <div class="row">
+               <div class="col-sm-3 bg-success">
+                    <h3>
+                         <p> <a href='viewAppointment.php' style="color:#ffff">View Appointment</a></p>
+                    </h3>
+                    <!-- <p>Lorem ipsum...</p> -->
+               </div>
+               <div class="col-sm-3 bg-warning">
+                    <h3>
+                         <p> Name:<?php echo $_SESSION['userDetails']['firstname']; ?> </p>
+                    </h3>
+               </div>
+               <div class="col-sm-3 bg-warning">
+                    <h3>
+                         <p> Department: <?php echo $_SESSION['userDetails']['department']; ?> </p>
+                    </h3>
+               </div>
+               <div class="col-sm-3 bg-success">
+                    <h3>
+                         <p><strong> Designation:</strong><?php echo $_SESSION['userDetails']['designation']; ?> </p>
+                    </h3>
+               </div>
+          </div>
+
+
+
+
+          <div class="row bg-danger">
+               <div class="col-sm-3">
+                    <p> Last Login Time:<?php echo $_SESSION['userDetails']['logout_time']; ?> </p>
+               </div>
+
+               <div class="col-sm-3">
+                    <p> Last Login Date:<?php echo $_SESSION['userDetails']['logout_date']; ?> </p>
+               </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <?php include("lib/footer.php"); ?>

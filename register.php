@@ -1,87 +1,253 @@
 <?php session_start();
 
-if(isset($_SESSION['user_info']) && !empty($_SESSION['user_info']['firstname'])){
+require_once('functions/alert.php');
+require_once('functions/users.php');
+include("lib/header.php");
+
+
+if (isUserLogIn()) {
 
   header('location: dashboard.php');
 }
-if(@$_SESSION['designation'] == 'Admin'){
-  header('location: admin/admin_dashboard.php');
+
+
+if (@$_SESSION['designation'] == 'Admin') {
+
+  header('location: admin_dashboard.php');
 }
- ?>
-<!DOCTYPE html>
-<html>
+
+?>
+
+
 <body>
 
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+
+    <h3> <a class="navbar-brand" href="#">SNH</a> </h3>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+       <h4> <a class="navbar-brand" href="login.php">Login</a></h4>
+      </li>
+     
+    </ul>
+  </nav>
 
 
-<h2>HTML Forms</h2>
-<div>
-<form action="validate.php" method="POST">
-  <label for="fname">First name:</label>
-  <input type="text" name="fname"><br>
- <?php if(isset($_SESSION['firstname'])){ echo "<span style='color:red';>". $_SESSION['firstname']. "</span><br>"; unset($_SESSION['firstname']); } ?>
-<?php if(isset($_SESSION['firstname1'])){ echo "<span style='color:red';>". $_SESSION['firstname1']. "</span><br>";unset($_SESSION['firstname1']);} ?>
-  <?php if(isset($_SESSION['firstname2'])){ echo "<span style='color:red';>". $_SESSION['firstname2']. "</span><br>";unset($_SESSION['firstname2']);} ?>
-    <?php if(isset($_SESSION['firstname3'])){ echo "<span style='color:red';>". $_SESSION['firstname3']. "</span><br>";unset($_SESSION['firstname3']);} ?>
-  <br>
-  <label for="lname">Last name:</label>
-  <input type="text"  name="lname" ><br>
-  <?php if(isset($_SESSION['lastname'])){ echo "<span style='color:red';>". $_SESSION['lastname']. "</span><br>"; unset($_SESSION['lastname']); } ?>
-  <?php if(isset($_SESSION['lastname1'])){ echo "<span style='color:red';>". $_SESSION['lastname1']. "</span><br>";unset($_SESSION['lastname1']);} ?>
-   <?php if(isset($_SESSION['lastname2'])){ echo "<span style='color:red';>". $_SESSION['lastname2']. "</span><br>";unset($_SESSION['lastname2']);} ?>
-     <?php if(isset($_SESSION['lastname3'])){ echo "<span style='color:red';>". $_SESSION['lastname3']. "</span><br>";unset($_SESSION['lastname3']);} ?>
-   <br>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Register</div>
+        <div class="card-body">
 
-  <label for="gender">Gender:</label>
-  <select  name="gender">
-  <option value=" ">please select</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-</select><br>
-<?php if(isset($_SESSION['gender'])){ echo "<span style='color:red';>". $_SESSION['gender']. "</span><br>"; unset($_SESSION['gender']); } ?>
-<br>
+          <div class="row mb-3 mt-5">
+            <div class=" mx-auto col-md-6">
+              <div class="card shadow-lg bg-white">
+                <div class="card-header bg-info">
+                  <h2 class="card-title text-center font-weight-bolder text-uppercase text-white-50">Registration Form</h2>
+                </div>
+                <div class="card-body">
 
 
-<label for="department">Department:</label>
-<input type="text"  name="department" ><br>
-<?php if(isset($_SESSION['department'])){ echo "<span style='color:red';>". $_SESSION['department']. "</span><br>"; unset($_SESSION['department']); } ?>
-<br>
+                  <form action="processRegister.php" method="POST" class="form-horizontal">
+
+                    <div class="form-group">
+                      <label for="firstname" class="cols-sm-2 control-label">First Name</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                          <input type="text" name="fname" class="form-control" placeholder="Enter email">
+
+                        </div>
+
+                        <?php print_error('firstname_error'); ?>
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="LastName" class="cols-sm-2 control-label">Last Name</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                          <input type="text" name="lname" class="form-control" placeholder="Enter Lastname">
+                        </div>
+
+                        <?php print_error('lastname_error'); ?>
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="Gender" class="cols-sm-2 control-label">Gender</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                          <select name="gender" class="form-control">
+
+                            <option value=" " class="form-control">please select</option>
+                            <option value="Male" class="form-control">Male</option>
+                            <option value="Female" class="form-control">Female</option>
+
+                          </select>
+
+                        </div>
+
+                        <?php print_error('gender_error'); ?>
+
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="Department" class="cols-sm-2 control-label">Department</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                          <select name="department" class="form-control">
+
+                            <option value=" " class="form-control">please select</option>
+                            <option value="Laboratory" class="form-control">Laboratory</option>
+                            <option value="Radiology" class="form-control">Radiology</option>
+
+                          </select><br>
+                        </div>
+                        <?php print_error('department_error'); ?>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="Designation" class="cols-sm-2 control-label">Designation</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                          <select name="designation" class="form-control">
+
+                            <option value=" " class="form-control">please select</option>
+                            <option value="Staff" class="form-control">Staff</option>
+                            <option value="Patient" class="form-control">Patient</option>
+
+                          </select>
+                        </div>
+
+                        <?php print_error('designation_error'); ?>
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="Email" class="cols-sm-2 control-label">Email</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                          <input type="email" class="form-control" name="email" id="password" placeholder="Enter your Email" />
+                        </div>
+
+                        <?php print_error('email_error'); ?>
+
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="cols-sm-2 control-label">Password</label>
+                      <div class="cols-sm-10">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                          <input type="password" class="form-control" name="password" placeholder="Enter Password" />
+                        </div>
+
+                        <?php print_error('password_error'); ?>
+
+                      </div>
+                    </div>
+                    <div class="form-group ">
+
+                      <input type="submit" name="Submit" value="Register" class="btn btn-primary btn-lg btn-block login-button">
+                    </div>
+                    <div class="login-register">
+                     <h4> <a href="login.php">Login</a></h4>
 
 
 
-<label for="designation">Designation:</label>
-<select  name="designation">
-<option value=" ">please select</option>
-<option value="Staff">Staff</option>
-<option value="Patient">Patient</option>
-</select><br>
-<?php if(isset($_SESSION['designation'])){ echo "<span style='color:red';>". $_SESSION['designation']. "</span><br>"; unset($_SESSION['designation']); } ?>
-
-<br>
 
 
-<label for="email">Email:</label>
-  <input type="email"  name="email" ><br>
-  <?php if(isset($_SESSION['email'])){ echo "<span style='color:red';>". $_SESSION['email']. "</span><br>"; unset($_SESSION['email']); } ?>
-  <?php if(isset($_SESSION['email1'])){ echo "<span style='color:red';>". $_SESSION['email1']. "</span><br>";unset($_SESSION['email1']);} ?>
-   <?php if(isset($_SESSION['email2'])){ echo "<span style='color:red';>". $_SESSION['email2']. "</span><br>";unset($_SESSION['email2']);} ?>
-    <?php if(isset($_SESSION['email3'])){ echo "<span style='color:red';>". $_SESSION['email3']. "</span><br>";unset($_SESSION['email3']);} ?>
-      <?php if(isset($_SESSION['user1'])){ echo "<span style='color:red';>". $_SESSION['user1']. "</span><br>";unset($_SESSION['user1']);} ?>
 
-   <br>
+                      <!-- <h2>HTML Forms</h2>
+              <div>
+                <form action="processRegister.php" method="POST">
+                  <label for="fname">First name:</label>
+                  <input type="text" name="fname" class="form-control" placeholder="Enter email"><br>
 
-  <label for="password">Password:</label>
-  <input type="password"  name="password" ><br>
-  <?php if(isset($_SESSION['password'])){ echo "<span style='color:red';>". $_SESSION['password']. "</span><br>"; unset($_SESSION['password']); } ?>
-  <?php if(isset($_SESSION['password1'])){ echo "<span style='color:red';>". $_SESSION['password1']. "</span><br>"; unset($_SESSION['password1']); } ?>
+                  <?php //print_error('firstname_error'); ?>
+                  <br>
 
-  <br>
 
-</select><br>
-  <input type="submit" name="Submit">
-</form>
+                  <label for="lname">Last name:</label>
+                  <input type="text" name="lname"><br>
 
-<p>If you click the "Submit" button, the form-data will</p>
 
-</body>
-</html>
+                  <?php //print_error('lastname_error'); ?>
+                  <br>
+
+
+
+                  <label for="gender">Gender:</label>
+                  <select name="gender">
+
+                    <option value=" ">please select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+
+                  </select><br>
+                  <?php // print_error('gender_error'); ?>
+                  <br>
+
+
+                  <label for="gender">Department:</label>
+                  <select name="department">
+
+                    <option value=" ">please select</option>
+                    <option value="Laboratory">Laboratory</option>
+                    <option value="Radiology">Radiology</option>
+
+                  </select><br>
+                  <br>
+
+
+
+                  <label for="designation">Designation:</label>
+                  <select name="designation">
+
+                    <option value=" ">please select</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Patient">Patient</option>
+
+                  </select><br>
+
+                  <?php //print_error('designation_error'); ?>
+
+                  <br>
+
+
+                  <label for="email">Email:</label>
+                  <input type="email" name="email"><br>
+
+                  <?php //print_error('email_error'); ?>
+                  <br>
+
+
+                  <label for="password">Password:</label>
+                  <input type="password" name="password"><br>
+
+                  <?php //print_error('password_error'); ?>
+                  <br>
+
+
+                  </select><br>
+
+                  <input type="submit" name="Submit" class="btn btn-info">
+
+                </form>
+
+                <p>If you click the "Submit" button, the form-data will</p> -->
+
+
+
+
+                      <?php include("lib/footer.php"); ?>
