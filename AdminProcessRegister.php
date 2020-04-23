@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }  
 
 
-     // validateGender($gender = $_POST['gender']);
+     
             if ($_POST['gender'] == " ") {
 
                     $errors++;

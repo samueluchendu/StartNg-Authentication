@@ -68,7 +68,7 @@ if (!adminLogin()) {
             <p>View Patient</p>
           </a>
         </h3>
-        <!-- <p>Lorem ipsum...</p> -->
+       
       </div>
       <div class="col-sm-3 bg-warning">
         <h3>
