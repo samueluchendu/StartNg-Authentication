@@ -90,8 +90,14 @@ $allAppointments = scandir("db/appointments/");
                             <td><?php echo $patientComplaintFromDB ?></td>
                         </tr>
 
-                <?php  }
-                } ?>
+                <?php } } ?>
+                
+                    
+                     
+                      
+                    
+
+                 
 
 
 

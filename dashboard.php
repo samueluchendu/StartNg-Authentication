@@ -34,12 +34,12 @@ if (staffLogin()) {
       <div class="container">
 
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-                  <!-- Brand/logo -->
+                  
 
                   <h3 class="navbar-brand"> WELCOME PATIENT</h3>
 
 
-                  <!-- Links -->
+                 
                   <ul class="navbar-nav">
                         <li class="nav-item">
                               <h6> <a class="navbar-brand"" href=" logout.php">Logout</a></h6>
@@ -73,7 +73,7 @@ if (staffLogin()) {
                         <h3>
                               <p> <a href="bookAppointment.php" style="color:#ffff">Book Appointment</a></p>
                         </h3>
-                        <!-- <p>Lorem ipsum...</p> -->
+                      
                   </div>
 
                   <div class="col-sm-3 bg-warning">

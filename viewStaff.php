@@ -28,7 +28,7 @@ $allStaff = scandir("db/user/");
     <div class="container">
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-            <!-- Brand/logo -->
+          
             <a class="navbar-brand" href="#">
                 <h3> View Staff</h3>
             </a>
@@ -100,7 +100,7 @@ $allStaff = scandir("db/user/");
                 } ?>
 
 
-                <!-- //echo "No Appointment"; -->
+            
 
 
 

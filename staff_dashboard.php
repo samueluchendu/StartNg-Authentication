@@ -19,12 +19,12 @@ if (!staffLogin()) {
      <div class="container">
 
           <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-               <!-- Brand/logo -->
+               
                <a class="navbar-brand" href="#">
                     <h3> WELCOME STAFF</h3>
                </a>
 
-               <!-- Links -->
+              
                <ul class="navbar-nav">
                     <li class="nav-item">
                          <h6> <a class="navbar-brand"" href=" logout.php">Logout</a></h6>
@@ -71,7 +71,7 @@ if (!staffLogin()) {
                     <h3>
                          <p> <a href='viewAppointment.php' style="color:#ffff">View Appointment</a></p>
                     </h3>
-                    <!-- <p>Lorem ipsum...</p> -->
+                 
                </div>
                <div class="col-sm-3 bg-warning">
                     <h3>
@@ -102,18 +102,6 @@ if (!staffLogin()) {
                     <p> Last Login Date:<?php echo $_SESSION['userDetails']['logout_date']; ?> </p>
                </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST['email'])) {
 
             $errors['email'] = "";
-           // $_SESSION['email'] = 'email is required';
+           
             set_alert('email_error', 'Email is required');
             header('location: reset.php');
 
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST['password'])) {
 
             $errors['password'] = "";
-           // $_SESSION['password'] = 'password is required';
+         
             set_alert('password_error', 'Password is required');
             header('location: reset.php');
 
