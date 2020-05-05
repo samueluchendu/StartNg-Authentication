@@ -2,7 +2,7 @@
 
 require_once('functions/alert.php');
 require_once('functions/users.php');
-  include("lib/footer.php");
+include("lib/header.php");
 
 
 if (!adminLogin()) {
@@ -39,9 +39,13 @@ if (!adminLogin()) {
 
 
 
-    <?php "<span style='color:green';>" . print_error('message') . "</span><br>"; ?>
+    <?php print_error('message'); ?>
 
+    <?php
 
+    // "<div class= 'alert alert-success' role='alert'>" .  print_error('message') . "</div>";
+
+    ?>
 
 
     <div class="row">
@@ -62,18 +66,19 @@ if (!adminLogin()) {
 
 
     <div class="row">
-      <div class="col-sm-3 bg-success">
+      <div class="col-sm-3 bg-warning">
         <h3>
-          <a href="viewPatient.php" class="navbar-brand" style="color:#ffff ">
-            <p>View Patient</p>
-          </a>
+          <p> <a href="viewPatient.php" class="navbar-brand" > View Patient </a></p>
+
+
         </h3>
-       
+
       </div>
       <div class="col-sm-3 bg-warning">
         <h3>
           <p> <a href="viewStaff.php" class="navbar-brand">View Staff</a></p>
         </h3>
+        <p> <a href="viewPaymentHistory.php" class="navbar-brand" style="color:#ffff">View Payment History</a></p>
       </div>
       <div class="col-sm-3 bg-warning">
         <h3>

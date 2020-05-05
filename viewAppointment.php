@@ -12,7 +12,7 @@ if (!staffLogin()) {
 }
 
 
-$department = $_SESSION['userDetails']['department'];
+$staffDepartment = $_SESSION['userDetails']['department'];
 
 $allAppointments = scandir("db/appointments/");
 
@@ -44,6 +44,8 @@ $allAppointments = scandir("db/appointments/");
         <br>
         <br>
         <br>
+        <br>
+        <br>
         <!-- <hr> -->
 
         <table class="table">
@@ -52,12 +54,16 @@ $allAppointments = scandir("db/appointments/");
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Date Of Appointment</th>
-                    <th>Naturer of Appointment</th>
+                    <th>Nature of Appointment</th>
                     <th>Initial Complaint</th>
+                    <th>Department</th>
+                    <th>Payment Status</th>
                 </tr>
             </thead>
 
             <?php
+
+
 
             for ($counter = 2; $counter < count($allAppointments); $counter++) {
 
@@ -76,46 +82,47 @@ $allAppointments = scandir("db/appointments/");
                 $patientDateOfAppointmentFromDB = $AppointmentcontentObject->dateOfAppointment;
                 $patientNatureOfAppointmentFromDB = $AppointmentcontentObject->natureOfAppointment;
                 $patientComplaintFromDB = $AppointmentcontentObject->complaint;
+                $patientPaymentStatusFromDB = $AppointmentcontentObject->paymentStatus;
 
+
+
+
+
+
+                if ($patientDepartmentFromDB == $staffDepartment) {
             ?>
 
-                <tbody>
+                    <tbody>
 
-                    <?php if ($patientDepartmentFromDB == $department) { ?>
                         <tr>
-                            <td><?php echo  $patientFirstNameFromDB   ?></td>
-                            <td><?php echo $patientLastNameFromDB  ?></td>
-                            <td><?php echo  $patientDateOfAppointmentFromDB  ?></td>
-                            <td><?php echo $patientNatureOfAppointmentFromDB  ?></td>
-                            <td><?php echo $patientComplaintFromDB ?></td>
+                            <td> <?php echo  $patientFirstNameFromDB; ?></td>
+                            <td> <?php echo $patientLastNameFromDB; ?></td>
+                            <td> <?php echo  $patientDateOfAppointmentFromDB; ?></td>
+                            <td> <?php echo $patientNatureOfAppointmentFromDB; ?></td>
+                            <td><?php echo $patientComplaintFromDB; ?></td>
+                            <td><?php echo $patientDepartmentFromDB; ?></td>
+                            <td>
+                                <?php
+
+                                if ($patientPaymentStatusFromDB == 0) {
+                                    echo 'Not Paid';
+                                } else {
+
+                                    echo 'Paid';
+                                }
+
+                                ?>
+
+                            </td>
+
                         </tr>
 
-                <?php } } ?>
-                
-                    
-                     
-                      
-                    
-
-                 
+                <?php }
+            }  ?>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </tbody>
+                    </tbody>
         </table>
 
 

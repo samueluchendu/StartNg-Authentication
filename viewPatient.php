@@ -39,7 +39,7 @@ $allPatient = scandir("db/user/");
                         <!-- Links -->
                         <ul class="navbar-nav">
                                 <li class="nav-item">
-                                        <a class="nav-link" href="logout.php">Logout</a>
+                                        <a class="navbar-brand" href="logout.php">Logout</a>
                                 </li>
                         </ul>
                 </nav>
@@ -71,27 +71,30 @@ $allPatient = scandir("db/user/");
                                 $patientContentObject = json_decode($patientContent);
 
 
+
                                 $patientDesignationFromDB = $patientContentObject->designation;
+
 
                                 $patientFirstNameFromDB = $patientContentObject->firstname;
                                 $patientLastNameFromDB = $patientContentObject->lastname;
                                 $patientEmailFromDB = $patientContentObject->email;
-                                $patientDesignationFromDB = $patientContentObject->designation;
 
-                                ?>
+
+                        ?>
                                 <tbody>
 
                                         <?php if ($patientDesignationFromDB == "Patient") {  ?>
 
                                                 <tr>
-                                                 <td><?php echo $patientFirstNameFromDB   ?></td>
-                                                 <td><?php echo $patientLastNameFromDB   ?></td>
-                                                 <td><?php echo  $patientEmailFromDB   ?></td>
-                                                 <td><?php echo $patientDesignationFromDB   ?></td>
+                                                        <td><?php echo $patientFirstNameFromDB   ?></td>
+                                                        <td><?php echo $patientLastNameFromDB   ?></td>
+                                                        <td><?php echo  $patientEmailFromDB   ?></td>
+                                                        <td><?php echo $patientDesignationFromDB   ?></td>
                                                 </tr>
 
-                                <?php }}?>
-                                
+                                <?php }
+                                } ?>
+
 
 
 

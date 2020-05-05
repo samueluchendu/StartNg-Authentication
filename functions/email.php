@@ -10,7 +10,7 @@ function sendMail($subject,$message,$email){
         "CC: samueluchendu47@gmail.com";
 
     $mail =  mail($email, $subject, $message, $headers);
-   // return $mail;
+ 
                                        
      if($mail){
 

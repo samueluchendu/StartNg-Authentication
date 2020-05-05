@@ -4,6 +4,10 @@ require_once('functions/users.php');
 include("lib/header.php");
 
 
+if (!isUserLogin()) {
+
+    header('location: login.php');
+}
 
 if (adminLogin()) {
 

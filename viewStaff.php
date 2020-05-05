@@ -73,6 +73,8 @@ $allStaff = scandir("db/user/");
 
                 $staffContentObject = json_decode($staffContent);
 
+            
+
 
                 $staffDesignationFromDB = $staffContentObject->designation;
 

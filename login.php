@@ -1,21 +1,21 @@
       <?php session_start();
 
       require_once('functions/alert.php');
-        include("lib/header.php"); 
+      include("lib/header.php");
 
       ?>
 
 
-      
+
 
       <body>
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
           <!-- Brand/logo -->
-         <h3> <a class="navbar-brand" href="#">SNH</a> </h3>
+          <h3> <a class="navbar-brand" href="#">SNH</a> </h3>
 
           <!-- Links -->
-         
+
         </nav>
         <br>
         <br>
@@ -33,14 +33,15 @@
 
                   <?php print_error('email_error'); ?>
                   <?php print_error('message'); ?>
-                  
+                 
+
                   <form action="processlogin.php" method="POST" class="needs-validation" novalidate>
 
                     <div class="form-group">
                       <label class="font-weight-bold" for="email">Email</label>
                       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
                       <div class="valid-feedback">Valid.</div>
-                      <div><?php  print_error('email_error')  ;?></div>
+                      <div><?php print_error('email_error'); ?></div>
                     </div>
 
                     <div class="form-group ">
@@ -48,7 +49,7 @@
                       <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required>
                       <div class="valid-feedback">Valid.</div>
                       <div> <?php print_error('password_error'); ?></div>
-                     </div>
+                    </div>
 
                     <div class="form-check">
                       <a href="forget.php">Forget password?</a>
@@ -66,6 +67,6 @@
         </div>
 
 
-       
+
 
         <?php include("lib/footer.php"); ?>

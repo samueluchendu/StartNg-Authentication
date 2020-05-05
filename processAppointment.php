@@ -154,6 +154,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         checkAppointment($complaint, $natureOfAppointment, $dateOfAppointment, $firstname, $lastname, $email, $timeOfAppointment, $department);
+        set_alert('success', 'Appointment booked successfully');
+        header('location:  dashboard.php');
+
     }
 }
 

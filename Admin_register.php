@@ -105,7 +105,7 @@ if (!adminLogin()) {
                   <select name="designation" class="form-control">
                     <option value=" "> Choose...</option>
                     <option value="Staff">Staff</option>
-                    <option value=" Patient">Patient</option>
+                    <option value="Patient">Patient</option>
 
                   </select>
                   <?php print_error('designation_error'); ?>

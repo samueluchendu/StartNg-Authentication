@@ -91,6 +91,7 @@ function userLogin($email, $password)
       if ($userPasswordFromDB == $user_password) {
 
         $userDetails = [
+          
           'id' => $userContentObject->id,
           'reg_time' => $userContentObject->reg_time,
           'reg_date' => $userContentObject->reg_date,

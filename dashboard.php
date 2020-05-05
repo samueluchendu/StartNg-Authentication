@@ -5,8 +5,7 @@ require_once('functions/alert.php');
 require_once('functions/users.php');
 include("lib/header.php");
 
-
-if (!isUserLogIn()) {
+if (!isUserLogin()) {
 
       header('location: login.php');
 }
@@ -29,17 +28,17 @@ if (staffLogin()) {
 
 <body>
 
-      <?php echo "<span style='color:green';>" . print_error('message') . "</span><br>"; ?>
+
 
       <div class="container">
 
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-                  
+
 
                   <h3 class="navbar-brand"> WELCOME PATIENT</h3>
 
 
-                 
+
                   <ul class="navbar-nav">
                         <li class="nav-item">
                               <h6> <a class="navbar-brand"" href=" logout.php">Logout</a></h6>
@@ -50,6 +49,12 @@ if (staffLogin()) {
             <br>
             <br>
             <br>
+            <br>
+
+
+            <?php echo print_error('message'); ?>
+            <?php echo print_error('success'); ?>
+
 
             <div class="row">
                   <div class="col bg-success">
@@ -73,7 +78,7 @@ if (staffLogin()) {
                         <h3>
                               <p> <a href="bookAppointment.php" style="color:#ffff">Book Appointment</a></p>
                         </h3>
-                      
+                        <p> <a href="patientPaymentHistory.php" style="color:#ffff">View Payment History</a></p>
                   </div>
 
                   <div class="col-sm-3 bg-warning">

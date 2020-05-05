@@ -8,6 +8,10 @@
             $_SESSION['error'] = $content;
             break;
 
+        case 'success':
+            $_SESSION['success'] = $content;
+            break;
+
         case 'nature_error':
             $_SESSION['nature_error'] = $content;
             break;
@@ -59,22 +63,33 @@
    }
 
 
-   function print_error($type){
 
-           if( isset($_SESSION[$type]) &&  !empty($_SESSION[$type]) ){
 
-            echo "<span style='color:red';>" . $_SESSION[$type] . "</span><br>";
+
+
+
+function print_error($type){
+
+    if (isset($_SESSION['message']) &&  !empty($_SESSION['message'])) {
+
+        echo "<div class= 'alert alert-success' role='alert'>" .  $_SESSION['message'] . "</div><br>";
+        unset($_SESSION['message']);
+
+    }else if(isset($_SESSION[$type]) &&  !empty($_SESSION[$type])){
+
+        echo "<div class= 'alert alert-danger' role='alert'>" .  $_SESSION[$type] . "</div><br>";
             unset($_SESSION[$type]);
 
-         }
-  
+    } else if (isset($_SESSION['success']) &&  !empty($_SESSION['success'])) {
 
-   }
+        echo "<div class= 'alert alert-success' role='alert'>" .  $_SESSION['success'] . "</div><br>";
+        unset($_SESSION['success']);
+
+    }
 
 
-
-
-  
+    
+}
 
 
 ?>

@@ -30,6 +30,7 @@ function checkAppointment($complaint, $natureOfAppointment, $dateOfAppointment, 
         'email'               =>     $email,
         'timeOfAppointment'   =>     $timeOfAppointment,
         'department'          =>     $department,
+        'paymentStatus'       =>     0,
 
 
     ];
@@ -44,7 +45,7 @@ function checkAppointment($complaint, $natureOfAppointment, $dateOfAppointment, 
 
                     $errors++;
 
-                    //$_SESSION['email_error'] = 'Appointment already exist';
+                    
                     set_alert('email_error', 'Appointment already exist');
                     header('location: bookAppointment.php');
 
@@ -54,8 +55,8 @@ function checkAppointment($complaint, $natureOfAppointment, $dateOfAppointment, 
 
 
             saveAppointment($appointmentDetails);
-            set_alert('message', 'Appointment booked successfully');
-            header('location:  dashboard.php');
+            // set_alert('message', 'Appointment booked successfully');
+            // header('location:  dashboard.php');
 
 
         }
